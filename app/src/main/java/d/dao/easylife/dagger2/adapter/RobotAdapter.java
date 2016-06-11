@@ -12,7 +12,7 @@ import com.zhy.autolayout.utils.AutoUtils;
 import java.util.List;
 
 import d.dao.easylife.dagger2.R;
-import d.dao.easylife.dagger2.bean.robot.RobotMessage;
+import d.dao.easylife.dagger2.model.bean.robot.RobotMessage;
 
 /**
  * Created by dao on 6/3/16.

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import android.content.Context;
 
-import d.dao.easylife.dagger2.bean.city.Cityinfo;
+import d.dao.easylife.dagger2.model.bean.city.Cityinfo;
 
 /**
  * 

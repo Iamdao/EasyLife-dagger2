@@ -1,12 +1,9 @@
 package d.dao.easylife.dagger2.modules;
 
-import javax.inject.Singleton;
-
 import d.dao.easylife.dagger2.api.ApiService;
 import d.dao.easylife.dagger2.presenter.impl.WeatherPresenter;
-import d.dao.easylife.dagger2.scope.ActivityScope;
+import d.dao.easylife.dagger2.scopes.ActivityScope;
 import d.dao.easylife.dagger2.ui.WeatherActivity;
-import d.dao.easylife.dagger2.utils.ReservoirUtils;
 import dagger.Module;
 import dagger.Provides;
 import rx.subscriptions.CompositeSubscription;

@@ -28,16 +28,13 @@ import butterknife.ButterKnife;
 import d.dao.easylife.dagger2.R;
 import d.dao.easylife.dagger2.adapter.JokeFirstAdapter;
 import d.dao.easylife.dagger2.app.EasyLifeApplication;
-import d.dao.easylife.dagger2.bean.joke.BaseJokeFirstData;
+import d.dao.easylife.dagger2.model.bean.joke.BaseJokeFirstData;
 import d.dao.easylife.dagger2.components.DaggerJokeFirstFragmentComponent;
 import d.dao.easylife.dagger2.modules.JokeFirstFragmentModule;
-import d.dao.easylife.dagger2.presenter.IJokeFirstPresenter;
 import d.dao.easylife.dagger2.presenter.impl.JokeFirstPresenter;
-import d.dao.easylife.dagger2.presenter.impl.JokeFirstPresenterImpl;
 import d.dao.easylife.dagger2.ui.view.IJokeFirstView;
 import d.dao.easylife.dagger2.utils.ReservoirUtils;
 import d.dao.easylife.dagger2.utils.ToastUtil;
-import d.dao.easylife.dagger2.utils.ToastUtils;
 
 /**
  * Created by dao on 5/31/16.
@@ -107,11 +104,9 @@ public class PageFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         tv_loadOnceMore.setOnClickListener(this);
 
-
         mSwipe.setOnRefreshListener(this);
         mSwipe.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
 
         mAdapter = new JokeFirstAdapter(mContext, mList);
         mRecyclerView.setAdapter(mAdapter);
@@ -146,11 +141,9 @@ public class PageFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0) {
                     // 正在向下滑动
-//                    Log.e("MainActivity", "向下滚动中");
                     this.toLast = true;
                 } else {
                     // 停止滑动或者向上滑动
-//                    Log.e("MainActivity", "向上滚动中");
                     this.toLast = false;
                 }
             }
@@ -211,11 +204,8 @@ public class PageFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         if (!isRefreshing) {
             if (mList != null && mList.size() > 0) {
                 //加载更多
-                Log.e("loadMore","start");
                 int maxId = mList.get(0).getId();
                 int minId = mList.get(mList.size() - 1).getId();
-                Log.e("maxId",""+maxId);
-                Log.e("minId",""+minId);
 
                 this.mJokeFirstPresenter.loadFirstJokeMore(maxId, minId, pageSize);
                 isRefreshing = true;

@@ -1,7 +1,5 @@
 package d.dao.easylife.dagger2.api;
 
-import android.app.Application;
-
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.concurrent.TimeUnit;
@@ -9,6 +7,10 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Singleton;
 
 import d.dao.easylife.dagger2.constants.BaseUrl;
+import d.dao.easylife.dagger2.qualifiers.ApiServiceIpQualifier;
+import d.dao.easylife.dagger2.qualifiers.ApiServiceRobotQualifier;
+import d.dao.easylife.dagger2.qualifiers.RetrofitIpQualifier;
+import d.dao.easylife.dagger2.qualifiers.RetrofitRobotQualifier;
 import dagger.Module;
 import dagger.Provides;
 import retrofit.GsonConverterFactory;
@@ -31,9 +33,23 @@ public class ApiServiceModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(OkHttpClient okHttpClient) {
+    Retrofit provideNewsRetrofit(OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BaseUrl.NEWS)
+                .addCallAdapterFactory(
+                        RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
+        return retrofit;
+    }
+
+    @Provides
+    @Singleton
+    @RetrofitRobotQualifier
+    Retrofit provideRobotRetrofit(OkHttpClient okHttpClient){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BaseUrl.ROBOT)
                 .addCallAdapterFactory(
                         RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -45,7 +61,34 @@ public class ApiServiceModule {
 
     @Provides
     @Singleton
-    ApiService provideApiService(Retrofit retrofit) {
+    @RetrofitIpQualifier
+    Retrofit provideIpRetrofit(OkHttpClient okHttpClient){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BaseUrl.IP)
+                .addCallAdapterFactory(
+                        RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
+        return retrofit;
+    }
+
+    @Provides
+    @Singleton
+    ApiService provideNewsApiService(Retrofit retrofit) {
+        return retrofit.create(ApiService.class);
+    }
+
+    @Provides
+    @Singleton
+    @ApiServiceRobotQualifier
+    ApiService provideRobotApiService(@RetrofitRobotQualifier Retrofit retrofit){
+        return retrofit.create(ApiService.class);
+    }
+    @Provides
+    @Singleton
+    @ApiServiceIpQualifier
+    ApiService provideIpApiService(@RetrofitIpQualifier Retrofit retrofit){
         return retrofit.create(ApiService.class);
     }
 }

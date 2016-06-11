@@ -11,18 +11,18 @@ import android.os.Bundle;
 public class NavigationManager {
 
 
-    public static void gotoActivity(Context context, Class<?> cls) {
+    public void gotoActivity(Context context, Class<?> cls) {
         Intent intent = new Intent(context, cls);
         context.startActivity(intent);
     }
 
-    public static void gotoActivityWithExtraString(Context context, Class<?> cls, String flag, String value) {
+    public void gotoActivityWithExtraString(Context context, Class<?> cls, String flag, String value) {
         Intent intent = new Intent(context, cls);
         intent.putExtra(flag, value);
         context.startActivity(intent);
     }
 
-    public static void gotoActivity(Context context, Class<?> cls, Bundle bundle) {
+    public void gotoActivity(Context context, Class<?> cls, Bundle bundle) {
         Intent intent = new Intent(context, cls);
         intent.putExtras(bundle);
         context.startActivity(intent);

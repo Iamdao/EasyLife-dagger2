@@ -2,8 +2,9 @@ package d.dao.easylife.dagger2.modules;
 
 import d.dao.easylife.dagger2.api.ApiService;
 import d.dao.easylife.dagger2.presenter.impl.NewsPresenter;
-import d.dao.easylife.dagger2.scope.ActivityScope;
+import d.dao.easylife.dagger2.scopes.ActivityScope;
 import d.dao.easylife.dagger2.ui.MainActivity;
+import d.dao.easylife.dagger2.utils.ReservoirUtils;
 import dagger.Module;
 import dagger.Provides;
 import rx.subscriptions.CompositeSubscription;
@@ -29,8 +30,9 @@ public class MainActivityModule {
     @ActivityScope
     NewsPresenter provideNewsPresenter(MainActivity mainActivity,
                                        ApiService apiService,
-                                       CompositeSubscription compositeSubscription){
-    return new NewsPresenter(mainActivity,apiService,compositeSubscription);
+                                       CompositeSubscription compositeSubscription,
+                                       ReservoirUtils reservoirUtils){
+    return new NewsPresenter(mainActivity,apiService,compositeSubscription,reservoirUtils);
     }
 
 

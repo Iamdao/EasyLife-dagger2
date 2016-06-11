@@ -2,9 +2,7 @@ package d.dao.easylife.dagger2.modules;
 
 import d.dao.easylife.dagger2.api.ApiService;
 import d.dao.easylife.dagger2.presenter.impl.JokeFirstPresenter;
-import d.dao.easylife.dagger2.presenter.impl.WeatherPresenter;
-import d.dao.easylife.dagger2.scope.ActivityScope;
-import d.dao.easylife.dagger2.ui.WeatherActivity;
+import d.dao.easylife.dagger2.scopes.ActivityScope;
 import d.dao.easylife.dagger2.ui.fragment.PageFragment;
 import d.dao.easylife.dagger2.ui.view.IJokeFirstView;
 import d.dao.easylife.dagger2.utils.ReservoirUtils;

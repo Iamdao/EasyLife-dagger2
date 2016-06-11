@@ -2,7 +2,7 @@ package d.dao.easylife.dagger2.ui.view;
 
 import java.util.List;
 
-import d.dao.easylife.dagger2.bean.news.BaseNewsData;
+import d.dao.easylife.dagger2.model.bean.news.BaseNewsData;
 
 /**
  * Created by dao on 5/29/16.

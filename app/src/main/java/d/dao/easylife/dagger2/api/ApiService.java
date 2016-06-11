@@ -1,10 +1,10 @@
 package d.dao.easylife.dagger2.api;
 
-import d.dao.easylife.dagger2.bean.ip.Ip;
-import d.dao.easylife.dagger2.bean.joke.JokeFirst;
-import d.dao.easylife.dagger2.bean.news.News;
-import d.dao.easylife.dagger2.bean.robot.RobotResponseMsg;
-import d.dao.easylife.dagger2.bean.weather.Weather;
+import d.dao.easylife.dagger2.model.bean.ip.Ip;
+import d.dao.easylife.dagger2.model.bean.joke.JokeFirst;
+import d.dao.easylife.dagger2.model.bean.news.News;
+import d.dao.easylife.dagger2.model.bean.robot.RobotResponseMsg;
+import d.dao.easylife.dagger2.model.bean.weather.Weather;
 import retrofit.http.GET;
 import retrofit.http.Query;
 import rx.Observable;

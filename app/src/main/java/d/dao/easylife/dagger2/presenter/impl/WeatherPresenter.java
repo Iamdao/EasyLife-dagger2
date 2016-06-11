@@ -1,22 +1,13 @@
 package d.dao.easylife.dagger2.presenter.impl;
 
 import android.util.Log;
-import android.widget.LinearLayout;
 
-import com.anupcowkur.reservoir.ReservoirGetCallback;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.List;
 
 import d.dao.easylife.dagger2.api.ApiService;
-import d.dao.easylife.dagger2.bean.news.BaseNewsData;
-import d.dao.easylife.dagger2.bean.news.News;
-import d.dao.easylife.dagger2.bean.weather.BaseWeatherData;
-import d.dao.easylife.dagger2.bean.weather.Weather;
-import d.dao.easylife.dagger2.ui.MainActivity;
+import d.dao.easylife.dagger2.model.bean.weather.BaseWeatherData;
+import d.dao.easylife.dagger2.model.bean.weather.Weather;
 import d.dao.easylife.dagger2.ui.WeatherActivity;
-import d.dao.easylife.dagger2.utils.ReservoirUtils;
 import d.dao.easylife.dagger2.utils.RxUtils;
 import rx.Observable;
 import rx.Subscriber;

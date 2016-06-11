@@ -4,6 +4,7 @@ import android.content.Context;
 
 import javax.inject.Singleton;
 
+import d.dao.easylife.dagger2.manager.CacheManager;
 import d.dao.easylife.dagger2.utils.ACache;
 import d.dao.easylife.dagger2.utils.ToastUtil;
 import dagger.Module;
@@ -44,5 +45,12 @@ public class AppModule {
     ACache provideACache(){
         return ACache.get(context);
     }
+
+    @Provides
+    @Singleton
+    CacheManager provideCacheManager(){
+        return new CacheManager(context);
+    }
+
 
 }

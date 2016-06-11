@@ -1,6 +1,6 @@
 package d.dao.easylife.dagger2.ui.view;
 
-import d.dao.easylife.dagger2.bean.robot.BaseRobotResponseData;
+import d.dao.easylife.dagger2.model.bean.robot.BaseRobotResponseData;
 
 /**
  * Created by dao on 6/4/16.

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import d.dao.easylife.dagger2.R;
-import d.dao.easylife.dagger2.bean.joke.BaseJokeFirstData;
+import d.dao.easylife.dagger2.model.bean.joke.BaseJokeFirstData;
 
 /**
  * Created by dao on 6/1/16.

@@ -1,6 +1,6 @@
 package d.dao.easylife.dagger2.ui.view;
 
-import d.dao.easylife.dagger2.bean.ip.BaseIpData;
+import d.dao.easylife.dagger2.model.bean.ip.BaseIpData;
 
 /**
  * Created by dao on 6/4/16.

@@ -20,7 +20,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import d.dao.easylife.dagger2.R;
-import d.dao.easylife.dagger2.bean.city.Cityinfo;
+import d.dao.easylife.dagger2.model.bean.city.Cityinfo;
 import d.dao.easylife.dagger2.utils.CitycodeUtil;
 import d.dao.easylife.dagger2.utils.FileUtil;
 

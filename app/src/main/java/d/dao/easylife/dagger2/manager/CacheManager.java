@@ -1,5 +1,7 @@
 package d.dao.easylife.dagger2.manager;
 
+import android.content.Context;
+
 import javax.inject.Inject;
 
 import d.dao.easylife.dagger2.app.EasyLifeApplication;
@@ -14,8 +16,12 @@ public class CacheManager {
 
     private ACache mACache;
 
-    public CacheManager(ACache cache){
+    public CacheManager(ACache cache) {
         this.mACache = cache;
+    }
+
+    public CacheManager(Context context) {
+        this.mACache = ACache.get(context);
     }
 
 

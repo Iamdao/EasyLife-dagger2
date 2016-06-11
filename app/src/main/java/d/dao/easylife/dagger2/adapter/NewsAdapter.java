@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import d.dao.easylife.dagger2.R;
-import d.dao.easylife.dagger2.bean.news.BaseNewsData;
+import d.dao.easylife.dagger2.model.bean.news.BaseNewsData;
 import d.dao.easylife.dagger2.utils.DateUtils;
 
 /**

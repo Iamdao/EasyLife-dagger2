@@ -10,7 +10,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,10 +27,11 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import d.dao.easylife.dagger2.R;
 import d.dao.easylife.dagger2.adapter.NewsAdapter;
 import d.dao.easylife.dagger2.app.AppComponent;
-import d.dao.easylife.dagger2.bean.news.BaseNewsData;
+import d.dao.easylife.dagger2.model.bean.news.BaseNewsData;
 import d.dao.easylife.dagger2.components.DaggerMainActivityComponent;
 import d.dao.easylife.dagger2.constants.BaseUrl;
 import d.dao.easylife.dagger2.manager.NavigationManager;
@@ -45,7 +45,7 @@ import d.dao.easylife.dagger2.utils.ToastUtils;
 import static android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 
 public class MainActivity extends BaseToolbarActivity
-        implements NavigationView.OnNavigationItemSelectedListener, IMainView, View.OnClickListener, OnRefreshListener {
+        implements NavigationView.OnNavigationItemSelectedListener, IMainView,OnRefreshListener {
 
     @Bind(R.id.drawer_layout)
     DrawerLayout mDrawer;// 抽屉
@@ -77,6 +77,9 @@ public class MainActivity extends BaseToolbarActivity
     @Inject
     ReservoirUtils reservoirUtils;//缓存
 
+    @Inject
+    NavigationManager mNavigationManager;//Activity跳转管理
+
 
     private boolean isRefreshing = false;//是否正在请求数据
 
@@ -102,7 +105,6 @@ public class MainActivity extends BaseToolbarActivity
                 .mainActivityModule(new MainActivityModule(this))
                 .build()
                 .inject(this);
-
     }
 
     @Override
@@ -162,7 +164,6 @@ public class MainActivity extends BaseToolbarActivity
 
     @Override
     protected void initListeners() {
-        tv_loadOnceMore.setOnClickListener(this);
         mNavigationView.setNavigationItemSelectedListener(this);
 
         mSwipe.setOnRefreshListener(this);
@@ -173,7 +174,7 @@ public class MainActivity extends BaseToolbarActivity
                 Bundle bundle = new Bundle();
                 bundle.putString(BaseUrl.WEBVIEW_TITLE, mList.get(position).getTitle());
                 bundle.putString(BaseUrl.WEBVIEW_URL, mList.get(position).getArticle_url());
-                NavigationManager.gotoActivity(mContext, WebViewActivity.class, bundle);
+                mNavigationManager.gotoActivity(mContext, WebViewActivity.class, bundle);
             }
         });
         this.mAdapter.setOnItemLongClickListener(new NewsAdapter.OnRecyclerViewItemLongClickListener() {
@@ -192,7 +193,6 @@ public class MainActivity extends BaseToolbarActivity
     public RecyclerView.OnScrollListener getRecyclerViewOnScrollListener() {
         return new RecyclerView.OnScrollListener() {
             private boolean toLast = false;
-
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0) {
@@ -217,21 +217,6 @@ public class MainActivity extends BaseToolbarActivity
                             MainActivity.this.loadMoreRequest();
                         }
                     }
-                } else if (layoutManager instanceof StaggeredGridLayoutManager) {
-                    StaggeredGridLayoutManager manager = (StaggeredGridLayoutManager) layoutManager;
-                    // 不滚动
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        /*
-                         * 由于是StaggeredGridLayoutManager
-                         * 取最底部数据可能有两个item，所以判断这之中有一个正好是 最后一条数据的index
-                         * 就OK
-                         */
-                        int[] bottom = manager.findLastCompletelyVisibleItemPositions(new int[2]);
-                        int lastItemCount = manager.getItemCount() - 1;
-                        if (toLast && (bottom[0] == lastItemCount || bottom[1] == lastItemCount)) {
-                            MainActivity.this.loadMoreRequest();
-                        }
-                    }
                 }
             }
         };
@@ -246,13 +231,11 @@ public class MainActivity extends BaseToolbarActivity
                 isRefreshing = true;
                 mSwipe.setRefreshing(true);
             }
-
         }
     }
 
     @Override
     public void onBackPressed() {
-
         if (mDrawer.isDrawerOpen(GravityCompat.START)) {
             mDrawer.closeDrawer(GravityCompat.START);
         } else {
@@ -262,7 +245,6 @@ public class MainActivity extends BaseToolbarActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -270,7 +252,6 @@ public class MainActivity extends BaseToolbarActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.action_settings) {
             return true;
         }
@@ -290,23 +271,23 @@ public class MainActivity extends BaseToolbarActivity
             //笑话
             case R.id.nav_joke:
                 mDrawer.closeDrawer(GravityCompat.START);
-                NavigationManager.gotoActivity(mContext, JokeActivity.class);
+                mNavigationManager.gotoActivity(mContext, JokeActivity.class);
                 break;
             //天气
             case R.id.nav_weather:
                 mDrawer.closeDrawer(GravityCompat.START);
-                NavigationManager.gotoActivity(mContext, WeatherActivity.class);
+                mNavigationManager.gotoActivity(mContext, WeatherActivity.class);
                 break;
             //机器人
             case R.id.nav_robot:
                 mDrawer.closeDrawer(GravityCompat.START);
-                NavigationManager.gotoActivity(mContext, RobotActivity.class);
+                mNavigationManager.gotoActivity(mContext, RobotActivity.class);
                 break;
 
             //常用查询
             case R.id.nav_find:
                 mDrawer.closeDrawer(GravityCompat.START);
-                NavigationManager.gotoActivity(mContext, QueryActivity.class);
+                mNavigationManager.gotoActivity(mContext, QueryActivity.class);
                 break;
 
             //分享
@@ -383,9 +364,7 @@ public class MainActivity extends BaseToolbarActivity
      */
     @Override
     public void onGetNewsFailure(Throwable e) {
-        toastUtil.showToast("failure");
         isRefreshing = false;
-        Log.e("error", e.toString());
         this.mSwipe.setRefreshing(false);
         toastUtil.showToast("刷新失败");
 
@@ -435,18 +414,22 @@ public class MainActivity extends BaseToolbarActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        reservoirUtils.refresh("news", mList);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
+
+    @OnClick({
+            R.id.tv_load_once_more
+    })
+    void onButtonClicked(View v) {
+        switch (v.getId()) {
             case R.id.tv_load_once_more:
                 mSwipe.setRefreshing(true);
                 isRefreshing = true;
                 this.mNewsPresenter.loadNews(false);
                 ll_error_root.setVisibility(View.GONE);
                 break;
+
         }
     }
+
 }

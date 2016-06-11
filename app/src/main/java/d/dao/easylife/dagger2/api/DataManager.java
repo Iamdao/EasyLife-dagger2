@@ -5,16 +5,16 @@ import android.util.Log;
 
 import java.util.List;
 
-import d.dao.easylife.dagger2.bean.ip.BaseIpData;
-import d.dao.easylife.dagger2.bean.ip.Ip;
-import d.dao.easylife.dagger2.bean.joke.BaseJokeFirstData;
-import d.dao.easylife.dagger2.bean.joke.JokeFirst;
-import d.dao.easylife.dagger2.bean.news.BaseNewsData;
-import d.dao.easylife.dagger2.bean.news.News;
-import d.dao.easylife.dagger2.bean.robot.BaseRobotResponseData;
-import d.dao.easylife.dagger2.bean.robot.RobotResponseMsg;
-import d.dao.easylife.dagger2.bean.weather.BaseWeatherData;
-import d.dao.easylife.dagger2.bean.weather.Weather;
+import d.dao.easylife.dagger2.model.bean.ip.BaseIpData;
+import d.dao.easylife.dagger2.model.bean.ip.Ip;
+import d.dao.easylife.dagger2.model.bean.joke.BaseJokeFirstData;
+import d.dao.easylife.dagger2.model.bean.joke.JokeFirst;
+import d.dao.easylife.dagger2.model.bean.news.BaseNewsData;
+import d.dao.easylife.dagger2.model.bean.news.News;
+import d.dao.easylife.dagger2.model.bean.robot.BaseRobotResponseData;
+import d.dao.easylife.dagger2.model.bean.robot.RobotResponseMsg;
+import d.dao.easylife.dagger2.model.bean.weather.BaseWeatherData;
+import d.dao.easylife.dagger2.model.bean.weather.Weather;
 import d.dao.easylife.dagger2.model.impl.FirstJokeModel;
 import d.dao.easylife.dagger2.model.impl.NewsModel;
 import d.dao.easylife.dagger2.model.impl.QueryIpModel;

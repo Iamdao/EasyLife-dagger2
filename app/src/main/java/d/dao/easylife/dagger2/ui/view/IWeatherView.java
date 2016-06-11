@@ -2,7 +2,7 @@ package d.dao.easylife.dagger2.ui.view;
 
 import java.util.List;
 
-import d.dao.easylife.dagger2.bean.weather.BaseWeatherData;
+import d.dao.easylife.dagger2.model.bean.weather.BaseWeatherData;
 
 /**
  * Created by dao on 6/3/16.

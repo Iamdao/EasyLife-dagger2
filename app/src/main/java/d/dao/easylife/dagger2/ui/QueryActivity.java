@@ -13,8 +13,8 @@ import android.widget.RadioGroup;
 
 import d.dao.easylife.dagger2.R;
 import d.dao.easylife.dagger2.app.AppComponent;
-import d.dao.easylife.dagger2.ui.fragment.fragment_query_ip;
-import d.dao.easylife.dagger2.ui.fragment.fragment_query_express;
+import d.dao.easylife.dagger2.ui.fragment.FragmentQueryIp;
+import d.dao.easylife.dagger2.ui.fragment.FragmentQueryExpress;
 import d.dao.easylife.dagger2.ui.fragment.Fragment3;
 import d.dao.easylife.dagger2.ui.fragment.Fragment4;
 
@@ -36,7 +36,7 @@ public class QueryActivity extends BaseToolbarActivity
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
-            Fragment fragment = new fragment_query_ip();
+            Fragment fragment = new FragmentQueryIp();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, fragment, fragment1Tag).commit();
         }
@@ -83,7 +83,7 @@ public class QueryActivity extends BaseToolbarActivity
                 switch (checkedId) {
                     case R.id.query_ip:
                         if (fragment1 == null) {
-                            fragment1 = new fragment_query_ip();
+                            fragment1 = new FragmentQueryIp();
                             ft.add(R.id.container, fragment1, fragment1Tag);
                         } else {
                             ft.show(fragment1);
@@ -91,7 +91,7 @@ public class QueryActivity extends BaseToolbarActivity
                         break;
                     case R.id.query_express:
                         if (fragment2 == null) {
-                            fragment2 = new fragment_query_express();
+                            fragment2 = new FragmentQueryExpress();
                             ft.add(R.id.container, fragment2, fragment2Tag);
                         } else {
                             ft.show(fragment2);

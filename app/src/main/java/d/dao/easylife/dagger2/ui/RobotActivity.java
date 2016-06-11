@@ -15,13 +15,19 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import d.dao.easylife.dagger2.R;
 import d.dao.easylife.dagger2.adapter.RobotAdapter;
 import d.dao.easylife.dagger2.app.AppComponent;
-import d.dao.easylife.dagger2.bean.robot.BaseRobotResponseData;
-import d.dao.easylife.dagger2.bean.robot.RobotMessage;
+import d.dao.easylife.dagger2.model.bean.robot.BaseRobotResponseData;
+import d.dao.easylife.dagger2.model.bean.robot.RobotMessage;
+import d.dao.easylife.dagger2.components.DaggerRobotActivityComponent;
 import d.dao.easylife.dagger2.constants.BaseUrl;
-import d.dao.easylife.dagger2.presenter.impl.RobotPresenterImpl;
+import d.dao.easylife.dagger2.modules.RobotActivityModule;
+import d.dao.easylife.dagger2.presenter.impl.RobotPresenter;
 import d.dao.easylife.dagger2.ui.view.IRobotView;
 import d.dao.easylife.dagger2.utils.ToastUtils;
 
@@ -29,17 +35,20 @@ import d.dao.easylife.dagger2.utils.ToastUtils;
  * Created by dao on 6/3/16.
  */
 public class RobotActivity extends BaseToolbarActivity implements View.OnClickListener, IRobotView {
+    @Bind(R.id.recycler)
+    RecyclerView mRecyclerView;
+    @Bind(R.id.tv_send)
+    TextView tv_send;
+    @Bind(R.id.et_send)
+    EditText et_send;
 
-    private RecyclerView mRecyclerView;
+    @Inject
+    RobotPresenter mPresenter;
+
+
     private Context mContext;
     private RobotAdapter mAdapter;
     private List<RobotMessage> mList = new ArrayList<>();
-    private TextView tv_send;
-    private EditText et_send;
-
-    private RobotPresenterImpl mPresenter;
-
-
 
 
     @Override
@@ -49,7 +58,9 @@ public class RobotActivity extends BaseToolbarActivity implements View.OnClickLi
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
-
+        DaggerRobotActivityComponent.builder().appComponent(appComponent)
+                .robotActivityModule(new RobotActivityModule(this))
+                .build().inject(this);
     }
 
     @Override
@@ -59,16 +70,11 @@ public class RobotActivity extends BaseToolbarActivity implements View.OnClickLi
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
+        ButterKnife.bind(this);
         super.setHomeTrue();//加上返回按钮
         mContext = RobotActivity.this;
-        mPresenter = new RobotPresenterImpl();
-        mPresenter.attachView(this);
-
-        tv_send = (TextView) findViewById(R.id.tv_send);
-        et_send = (EditText) findViewById(R.id.et_send);
-
         //RecyclerView
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
+
 
         mAdapter = new RobotAdapter(mContext, mList);
         mRecyclerView.setAdapter(mAdapter);
@@ -88,7 +94,6 @@ public class RobotActivity extends BaseToolbarActivity implements View.OnClickLi
     @Override
     protected void initListeners() {
         tv_send.setOnClickListener(this);
-
     }
 
     @Override
@@ -112,7 +117,7 @@ public class RobotActivity extends BaseToolbarActivity implements View.OnClickLi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;
@@ -123,13 +128,12 @@ public class RobotActivity extends BaseToolbarActivity implements View.OnClickLi
     //获取应答成功
     @Override
     public void onGetRobotResponseSuccess(BaseRobotResponseData data) {
-            String result = data.getText();
-            mList.add(new RobotMessage(result, 1));
-            mAdapter = new RobotAdapter(mContext, mList);
-            mAdapter.notifyDataSetChanged();
-            mRecyclerView.scrollToPosition(mList.size() - 1);
+        String result = data.getText();
+        mList.add(new RobotMessage(result, 1));
+        mAdapter = new RobotAdapter(mContext, mList);
+        mAdapter.notifyDataSetChanged();
+        mRecyclerView.scrollToPosition(mList.size() - 1);
     }
-
 
 
     //获取应答失败
@@ -141,7 +145,5 @@ public class RobotActivity extends BaseToolbarActivity implements View.OnClickLi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.detachView(this);
-
     }
 }
