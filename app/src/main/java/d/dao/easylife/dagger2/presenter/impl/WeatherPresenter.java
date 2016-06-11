@@ -4,9 +4,12 @@ import android.util.Log;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import d.dao.easylife.dagger2.api.ApiService;
 import d.dao.easylife.dagger2.model.bean.weather.BaseWeatherData;
 import d.dao.easylife.dagger2.model.bean.weather.Weather;
+import d.dao.easylife.dagger2.scopes.ActivityScope;
 import d.dao.easylife.dagger2.ui.WeatherActivity;
 import d.dao.easylife.dagger2.utils.RxUtils;
 import rx.Observable;
@@ -17,6 +20,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by dao on 6/9/16.
  */
+@ActivityScope
 public class WeatherPresenter {
 
     private static int pageSize = 10;
@@ -26,6 +30,7 @@ public class WeatherPresenter {
     private CompositeSubscription mCompositeSubscription;
 
 
+    @Inject
     public WeatherPresenter(WeatherActivity weatherActivity, ApiService apiService,
                             CompositeSubscription compositeSubscription) {
         this.mWeatherActivity = weatherActivity;

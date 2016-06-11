@@ -26,15 +26,15 @@ public class RobotActivityModule {
     RobotActivity provideRobotActivity(){
         return mRobotActivity;
     }
-
-    @Provides
-    @ActivityScope
-    RobotPresenter provideRobotPresenter(RobotActivity robotActivity,
-                                        @ApiServiceRobotQualifier ApiService apiService,
-                                        CompositeSubscription compositeSubscription,
-                                        ReservoirUtils reservoirUtils){
-    return new RobotPresenter(robotActivity,apiService,compositeSubscription,reservoirUtils);
-    }
+//
+//    @Provides
+//    @ActivityScope
+//    RobotPresenter provideRobotPresenter(RobotActivity robotActivity,
+//                                        @ApiServiceRobotQualifier ApiService apiService,
+//                                        CompositeSubscription compositeSubscription,
+//                                        ReservoirUtils reservoirUtils){
+//    return new RobotPresenter(robotActivity,apiService,compositeSubscription,reservoirUtils);
+//    }
 
 
 }

@@ -8,10 +8,13 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import d.dao.easylife.dagger2.api.ApiService;
 import d.dao.easylife.dagger2.model.bean.news.BaseNewsData;
 import d.dao.easylife.dagger2.model.bean.news.News;
 import d.dao.easylife.dagger2.presenter.INewsPresenter;
+import d.dao.easylife.dagger2.scopes.ActivityScope;
 import d.dao.easylife.dagger2.ui.MainActivity;
 import d.dao.easylife.dagger2.ui.view.IMainView;
 import d.dao.easylife.dagger2.utils.ReservoirUtils;
@@ -24,6 +27,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by dao on 6/9/16.
  */
+@ActivityScope
 public class NewsPresenter implements INewsPresenter{
 
     private static int pageSize = 10;
@@ -31,15 +35,17 @@ public class NewsPresenter implements INewsPresenter{
     private MainActivity mMainActivity;
     private ApiService mApiService;
     private CompositeSubscription mCompositeSubscription;
-    private ReservoirUtils mReservoirUtils;
 
+    @Inject
+    ReservoirUtils mReservoirUtils;
+
+    @Inject
     public NewsPresenter(MainActivity mainActivity, ApiService apiService,
-                         CompositeSubscription compositeSubscription,
-                         ReservoirUtils reservoirUtils) {
+                         CompositeSubscription compositeSubscription
+                         ) {
         this.mMainActivity = mainActivity;
         this.mApiService = apiService;
         this.mCompositeSubscription = compositeSubscription;
-        this.mReservoirUtils = reservoirUtils;
     }
 
 

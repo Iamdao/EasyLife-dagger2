@@ -8,9 +8,12 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import d.dao.easylife.dagger2.api.ApiService;
 import d.dao.easylife.dagger2.model.bean.joke.BaseJokeFirstData;
 import d.dao.easylife.dagger2.model.bean.joke.JokeFirst;
+import d.dao.easylife.dagger2.scopes.ActivityScope;
 import d.dao.easylife.dagger2.ui.view.IJokeFirstView;
 import d.dao.easylife.dagger2.utils.ReservoirUtils;
 import d.dao.easylife.dagger2.utils.RxUtils;
@@ -22,6 +25,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by dao on 6/9/16.
  */
+@ActivityScope
 public class JokeFirstPresenter {
 
     private static int pageSize = 10;
@@ -29,14 +33,16 @@ public class JokeFirstPresenter {
     private IJokeFirstView mView;
     private ApiService mApiService;
     private CompositeSubscription mCompositeSubscription;
-    private ReservoirUtils mReservoirUtils;
 
+    @Inject
+    ReservoirUtils mReservoirUtils;
+
+    @Inject
     public JokeFirstPresenter(IJokeFirstView jokeFirstView, ApiService apiService,
-                              CompositeSubscription compositeSubscription,ReservoirUtils reservoirUtils) {
+                              CompositeSubscription compositeSubscription){
         this.mView = jokeFirstView;
         this.mApiService = apiService;
         this.mCompositeSubscription = compositeSubscription;
-        this.mReservoirUtils = reservoirUtils;
     }
     public void loadFirstJoke(int maxId, int minId, int size) {
         Observable<JokeFirst> data = mApiService.loadFirstJoke(maxId,minId,size);

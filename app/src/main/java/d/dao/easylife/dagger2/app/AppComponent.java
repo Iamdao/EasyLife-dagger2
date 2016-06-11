@@ -1,5 +1,7 @@
 package d.dao.easylife.dagger2.app;
 
+import android.content.Context;
+
 import javax.inject.Singleton;
 
 import d.dao.easylife.dagger2.api.ApiService;
@@ -23,8 +25,8 @@ import rx.subscriptions.CompositeSubscription;
 public interface AppComponent {
 
     //    Application getApplication();
-    ToastUtil getToastUtil();
 
+    Context getContext();
     ACache getACache();
 
     CacheManager getCacheManager();
@@ -36,8 +38,5 @@ public interface AppComponent {
     ApiService getIpApiService();
 
     CompositeSubscription getCompositeSubscription();
-
-    ReservoirUtils getReservoirUtils();
-
-    NavigationManager getNavigationManager();
+//    NavigationManager getNavigationManager();
 }

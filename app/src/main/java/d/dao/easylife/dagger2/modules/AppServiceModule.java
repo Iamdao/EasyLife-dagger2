@@ -22,15 +22,9 @@ public class AppServiceModule {
         return new CompositeSubscription();
     }
 
-    @Provides
-    @Singleton
-    ReservoirUtils provideReservoirUtils() {
-        return new ReservoirUtils();
-    }
-
-    @Provides
-    @Singleton
-    NavigationManager provideNavigationManager(){
-        return new NavigationManager();
-    }
+//    @Provides
+//    @Singleton
+//    NavigationManager provideNavigationManager(){
+//        return new NavigationManager();
+//    }
 }

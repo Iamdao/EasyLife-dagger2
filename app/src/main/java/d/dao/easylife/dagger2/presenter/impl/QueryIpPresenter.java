@@ -1,8 +1,13 @@
 package d.dao.easylife.dagger2.presenter.impl;
 
+import android.support.annotation.IntegerRes;
+
+import javax.inject.Inject;
+
 import d.dao.easylife.dagger2.api.ApiService;
 import d.dao.easylife.dagger2.model.bean.ip.BaseIpData;
 import d.dao.easylife.dagger2.model.bean.ip.Ip;
+import d.dao.easylife.dagger2.scopes.ActivityScope;
 import d.dao.easylife.dagger2.ui.fragment.FragmentQueryIp;
 import d.dao.easylife.dagger2.utils.ReservoirUtils;
 import d.dao.easylife.dagger2.utils.RxUtils;
@@ -14,6 +19,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by dao on 6/9/16.
  */
+@ActivityScope
 public class QueryIpPresenter {
 
     private static int pageSize = 10;
@@ -21,15 +27,14 @@ public class QueryIpPresenter {
     private FragmentQueryIp mFragmentQueryIp;
     private ApiService mApiService;
     private CompositeSubscription mCompositeSubscription;
-    private ReservoirUtils mReservoirUtils;
 
+    @Inject
     public QueryIpPresenter(FragmentQueryIp fragmentQueryIp, ApiService apiService,
                             CompositeSubscription compositeSubscription,
                             ReservoirUtils reservoirUtils) {
         this.mFragmentQueryIp = fragmentQueryIp;
         this.mApiService = apiService;
         this.mCompositeSubscription = compositeSubscription;
-        this.mReservoirUtils = reservoirUtils;
     }
 
     public void queryIp(String ip, String key) {

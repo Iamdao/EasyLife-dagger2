@@ -24,14 +24,14 @@ public class WeatherActivityModule {
         return this.mWeatherActivity;
     }
 
-    @Provides
-    @ActivityScope
-    WeatherPresenter provideWeatherPresenter(WeatherActivity weatherActivity,
-                                             ApiService apiService,
-                                             CompositeSubscription compositeSubscription
-                                             ){
-        return new WeatherPresenter(weatherActivity,apiService,compositeSubscription
-                                    );
-    }
+//    @Provides
+//    @ActivityScope
+//    WeatherPresenter provideWeatherPresenter(WeatherActivity weatherActivity,
+//                                             ApiService apiService,
+//                                             CompositeSubscription compositeSubscription
+//                                             ){
+//        return new WeatherPresenter(weatherActivity,apiService,compositeSubscription
+//                                    );
+//    }
 
 }

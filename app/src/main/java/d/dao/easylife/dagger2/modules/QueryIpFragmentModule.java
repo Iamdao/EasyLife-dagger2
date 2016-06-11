@@ -27,14 +27,14 @@ public class QueryIpFragmentModule {
         return mFragmentQueryIp;
     }
 
-    @Provides
-    @ActivityScope
-    QueryIpPresenter provideQueryIpPresenter(FragmentQueryIp fragmentQueryIp,
-                                          @ApiServiceIpQualifier ApiService apiService,
-                                          CompositeSubscription compositeSubscription,
-                                          ReservoirUtils reservoirUtils){
-    return new QueryIpPresenter(fragmentQueryIp,apiService,compositeSubscription,reservoirUtils);
-    }
+//    @Provides
+//    @ActivityScope
+//    QueryIpPresenter provideQueryIpPresenter(FragmentQueryIp fragmentQueryIp,
+//                                          @ApiServiceIpQualifier ApiService apiService,
+//                                          CompositeSubscription compositeSubscription,
+//                                          ReservoirUtils reservoirUtils){
+//    return new QueryIpPresenter(fragmentQueryIp,apiService,compositeSubscription,reservoirUtils);
+//    }
 
 
 }

@@ -1,5 +1,6 @@
 package d.dao.easylife.dagger2.app;
 
+import android.app.Application;
 import android.content.Context;
 
 import javax.inject.Singleton;
@@ -34,12 +35,12 @@ public class AppModule {
         this.context = context;
     }
 
+
     @Provides
     @Singleton
-    ToastUtil provideToastUtil(){
-        return new ToastUtil(context);
+    Context provideContext() {
+        return this.context;
     }
-
     @Provides
     @Singleton
     ACache provideACache(){

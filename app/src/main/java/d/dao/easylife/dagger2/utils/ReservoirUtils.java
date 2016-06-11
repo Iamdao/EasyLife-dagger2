@@ -33,6 +33,10 @@ import com.anupcowkur.reservoir.ReservoirPutCallback;
 
 import java.lang.reflect.Type;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import d.dao.easylife.dagger2.scopes.ActivityScope;
 import rx.Observable;
 
 /**
@@ -40,12 +44,17 @@ import rx.Observable;
  * Created by：CaMnter
  * Time：2016-01-13 14:06
  */
+@ActivityScope
 public class ReservoirUtils {
 
     private static final String TAG = "ReservoirUtils";
 
     private static ReservoirUtils instance;
 
+    @Inject
+    public ReservoirUtils(){
+
+    }
 
     public synchronized static ReservoirUtils getInstance() {
         if (instance == null) {

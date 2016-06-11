@@ -26,14 +26,14 @@ public class MainActivityModule {
         return mMainActivity;
     }
 
-    @Provides
-    @ActivityScope
-    NewsPresenter provideNewsPresenter(MainActivity mainActivity,
-                                       ApiService apiService,
-                                       CompositeSubscription compositeSubscription,
-                                       ReservoirUtils reservoirUtils){
-    return new NewsPresenter(mainActivity,apiService,compositeSubscription,reservoirUtils);
-    }
+//    @Provides
+//    @ActivityScope
+//    NewsPresenter provideNewsPresenter(MainActivity mainActivity,
+//                                       ApiService apiService,
+//                                       CompositeSubscription compositeSubscription,
+//                                       ReservoirUtils reservoirUtils){
+//    return new NewsPresenter(mainActivity,apiService,compositeSubscription,reservoirUtils);
+//    }
 
 
 }

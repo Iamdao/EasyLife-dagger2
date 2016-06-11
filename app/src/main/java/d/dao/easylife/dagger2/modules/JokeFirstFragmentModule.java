@@ -27,16 +27,16 @@ public class JokeFirstFragmentModule {
         return this.mPageFragment;
     }
 
-    @Provides
-    @ActivityScope
-    JokeFirstPresenter provideJokeFirstPresenter(IJokeFirstView jokeFirstView,
-                                                 ApiService apiService,
-                                                 CompositeSubscription compositeSubscription,
-                                                 ReservoirUtils reservoirUtils
-    ) {
-        return new JokeFirstPresenter(jokeFirstView, apiService,
-                compositeSubscription, reservoirUtils
-        );
-    }
+//    @Provides
+//    @ActivityScope
+//    JokeFirstPresenter provideJokeFirstPresenter(IJokeFirstView jokeFirstView,
+//                                                 ApiService apiService,
+//                                                 CompositeSubscription compositeSubscription,
+//                                                 ReservoirUtils reservoirUtils
+//    ) {
+//        return new JokeFirstPresenter(jokeFirstView, apiService,
+//                compositeSubscription, reservoirUtils
+//        );
+//    }
 
 }
